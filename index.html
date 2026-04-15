@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .hero-gradient { background: linear-gradient(135deg, #53e77d 0%, #014118 100%); }
 
         /* Định nghĩa tỷ lệ khung hình mới: chuẩn iPhone dọc */
         .iphone-mockup {
@@ -23,7 +23,29 @@
         .iphone-mockup img {
             width: 100%;
             height: 100%;
-            object-cover: cover; /* Cắt ảnh để lấp đầy mà không bị méo */
+            object-fit: cover; /* Cắt ảnh để lấp đầy mà không bị méo */
+        }
+
+        /* Hiệu ứng xuất hiện khi cuộn xuống */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll,
+            .reveal-on-scroll.revealed {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
         }
     </style>
 </head>
@@ -31,15 +53,16 @@
 
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-indigo-600 flex items-center gap-2">
-                <i class="fas fa-rocket"></i> UniBite
+            <div class="text-2xl font-bold text-[#459b5e] flex items-center gap-2 " >
+                <img src="assets/images/logo.jpg" alt="UniBite logo" class="h-8 w-8 rounded-[5px] object-cover shrink-0">    
+                <span>UniBite</span>
             </div>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#features" class="hover:text-indigo-600 transition">Tính năng</a>
-                <a href="#about" class="hover:text-indigo-600 transition">Giới thiệu</a>
-                <a href="#download" class="hover:text-indigo-600 transition">Tải về</a>
+            <div class="hidden md:flex space-x-50 font-bold">
+                <a href="#features" class="hover:text-[#459b5e] transition">Tính năng</a>
+                <a href="#about" class="hover:text-[#459b5e] transition">Giới thiệu</a>
+                <a href="#download" class="hover:text-[#459b5e] transition">Tải về</a>
             </div>
-            <a href="#download" class="bg-indigo-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-indigo-700 transition">
+            <a href="#download" class="bg-[#459b5e] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#387f4d] transition">
                 Bắt đầu ngay
             </a>
         </div>
@@ -47,10 +70,13 @@
 
     <section class="hero-gradient pt-32 pb-20 px-6">
         <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-white mb-12 md:mb-0">
-                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
-                    UNIBITE
+            <div class="md:w-1/2 text-white mb-12 md:mb-0 align-middle">
+                <h1 class="text-6xl md:text-8xl font-extrabold leading-tight mb-6 ">
+                    UniBite
                 </h1>
+                <h2 class="text-2xl md:text-4xl font-extrabold leading-tight mb-6">
+                    Eat smarter at VNU
+                </h2>
                 <p class="text-lg opacity-90 mb-8 max-w-lg">
                     UniBite - Nền tảng đặt món tối ưu giúp sinh viên VNU tiết kiệm thời gian và tận hưởng ưu đãi ẩm thực mỗi ngày.
                 </p>
@@ -75,7 +101,7 @@
                 <div class="relative w-72 h-auto aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-2xl border-[6px] border-black overflow-hidden bg-gray-800 rounded-[3rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden">
                     <img src="assets/images/homepage.png" alt="App Screenshot" class="w-full h-full object-cover">
                 </div>
-                <div class="absolute -z-10 w-72 h-72 bg-indigo-400 rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                <div class="absolute -z-10 w-72 h-72 bg-[#459b5e] rounded-full blur-3xl opacity-30 animate-pulse"></div>
             </div>
         </div>
     </section>
@@ -88,32 +114,32 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="p-8 rounded-3xl bg-red-50 border border-red-100 shadow-sm">
-                <div class="w-12 h-12 bg-red-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-100">
+            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 shadow-sm">
+                <div class="w-12 h-12 bg-[#459b5e] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100">
                     <i class="fas fa-exclamation-circle text-xl"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Vấn đề</h3>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-600 leading-relaxed text-justify">
                     Sinh viên tại khu vực ĐHQG TP.HCM thường gặp khó khăn trong việc tìm kiếm các quán ăn ngon, rẻ và đảm bảo vệ sinh giữa hàng trăm hàng quán tự phát. Việc seeding bẩn từ các hàng quán hoặc thiếu thông tin về menu, giá cả gây mất thời gian và giảm trải nghiệm ăn uống của sinh viên.
                 </p>
             </div>
 
             <div class="p-8 rounded-3xl bg-green-50 border border-green-100 shadow-sm">
-                <div class="w-12 h-12 bg-[#22c55e] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100">
+                <div class="w-12 h-12 bg-[#459b5e] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100">
                     <i class="fas fa-graduation-cap text-xl"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Đối tượng</h3>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-600 leading-relaxed text-justify">
                     Hệ sinh thái dành riêng cho "Cộng đồng VNU-HCM": không chỉ có các bạn sinh viên trong kí túc xá, mà còn là một cộng đồng những người sinh sống và làm việc tại Làng Đại học.
                 </p>
             </div>
 
-            <div class="p-8 rounded-3xl bg-blue-50 border border-blue-100 shadow-sm">
-                <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-100">
+            <div class="p-8 rounded-3xl bg-green-50 border border-green-100 shadow-sm">
+                <div class="w-12 h-12 bg-[#459b5e] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-green-100">
                     <i class="fas fa-star text-xl"></i>
                 </div>
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">Giá trị</h3>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-600 leading-relaxed text-justify">
                     Nền tảng giúp tối ưu hóa quy trình đặt món, tích hợp các mã giảm giá cho sinh viên và hệ thống đánh giá thực tế từ người dùng trong cộng đồng.
                 </p>
             </div>
@@ -130,17 +156,18 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <div class="text-indigo-600 text-3xl mb-4"><i class="fas fa-code"></i></div>
+                    <div class="text-[#459b5e] text-3xl mb-4"><i class="fas fa-code"></i></div>
                     <h3 class="text-xl font-bold mb-3">Frontend</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">React Native</span>
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">TypeScript</span>
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Tailwind CSS</span>
+                        <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700"> Expo</span>
                     </div>
                 </div>
 
                 <div class="p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <div class="text-indigo-600 text-3xl mb-4"><i class="fas fa-server"></i></div>
+                    <div class="text-[#459b5e] text-3xl mb-4"><i class="fas fa-server"></i></div>
                     <h3 class="text-xl font-bold mb-3">Backend</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Node.js</span>
@@ -150,7 +177,7 @@
                 </div>
 
                 <div class="p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <div class="text-indigo-600 text-3xl mb-4"><i class="fas fa-bolt"></i></div>
+                    <div class="text-[#459b5e] text-3xl mb-4"><i class="fas fa-bolt"></i></div>
                     <h3 class="text-xl font-bold mb-3">Real-time</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Socket.io</span>
@@ -160,7 +187,7 @@
                 </div>
 
                 <div class="p-6 rounded-2xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-xl transition-all duration-300">
-                    <div class="text-indigo-600 text-3xl mb-4"><i class="fas fa-cloud"></i></div>
+                    <div class="text-[#459b5e] text-3xl mb-4"><i class="fas fa-cloud"></i></div>
                     <h3 class="text-xl font-bold mb-3">Cloud</h3>
                     <div class="flex flex-wrap gap-2">
                         <span class="px-3 py-1 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">AWS</span>
@@ -173,9 +200,11 @@
             <div class="mt-20 flex flex-wrap justify-center items-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                 <i class="fab fa-react text-5xl"></i>
                 <i class="fab fa-node-js text-5xl"></i>
-                <i class="fab fa-cloudflare text-5xl"></i>
                 <i class="fab fa-docker text-5xl"></i>
-                <i class="fab fa-python text-5xl"></i>
+                <i class="fab fa-aws text-5xl"></i>
+                <i class="fab fa-js-square text-5xl"></i>
+                <i class="fas fa-database text-5xl"></i>
+                <i class="fas fa-bolt text-5xl"></i>
             </div>
         </div>
     </section>
@@ -184,22 +213,22 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-16 text-gray-800">Tại sao chọn chúng tôi?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-indigo-100 group">
-                    <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-green-100 group">
+                    <div class="w-16 h-16 bg-green-100 text-[#459b5e] rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-4">Tốc độ cực nhanh</h3>
                     <p class="text-gray-600">Tối ưu hóa mã nguồn giúp ứng dụng khởi động và phản hồi trong tích tắc.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-indigo-100 group">
-                    <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-green-100 group">
+                    <div class="w-16 h-16 bg-green-100 text-[#459b5e] rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-4">Bảo mật tuyệt đối</h3>
                     <p class="text-gray-600">Dữ liệu của bạn được mã hóa đầu cuối, đảm bảo quyền riêng tư 100%.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-indigo-100 group">
-                    <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
+                <div class="p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-all duration-300 border border-transparent hover:border-green-100 group">
+                    <div class="w-16 h-16 bg-green-100 text-[#459b5e] rounded-2xl flex items-center justify-center text-2xl mb-6 mx-auto group-hover:scale-110 transition">
                         <i class="fas fa-sync"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-4">Đồng bộ đám mây</h3>
@@ -216,21 +245,21 @@
             <div class="flex flex-col md:flex-row items-center mb-32 gap-12">
                 <div class="md:w-1/2 flex justify-center">
                     <div class="relative w-72 h-auto aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-2xl border-[6px] border-black overflow-hidden bg-gray-800 rounded-[3rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden transform -rotate-3 hover:rotate-0 transition duration-500">
-                    <img src="assets/images/order.png" alt="Screen 1" class="w-full h-full object-cover">
+                    <img src="assets/images/store.png" alt="Screen 1" class="w-full h-full object-cover">
                 </div>
                 </div>
                 <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-bold uppercase tracking-wider text-sm">Quản lý thông minh</span>
-                    <h3 class="text-3xl font-bold mt-2 mb-6">Theo dõi mọi chỉ số thời gian thực</h3>
+                    <span class="text-[#459b5e] font-bold uppercase tracking-wider text-sm">Đặt đơn dễ dàng</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-6">Duyệt menu và đặt hàng chỉ trong vài tap</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Giao diện dashboard trực quan giúp bạn nắm bắt toàn bộ tiến độ công việc. Các biểu đồ được cập nhật liên tục, hỗ trợ bạn đưa ra quyết định chính xác ngay lập tức.
+                        Giao diện trực quan giúp bạn dễ dàng tìm kiếm quán ăn yêu thích, xem menu chi tiết với giá cả rõ ràng và đặt đơn nhanh chóng chỉ với vài cú chạm trên điện thoại.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center text-gray-700 font-medium">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Tự động hóa báo cáo hàng tuần
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Menu đầy đủ với hình ảnh và giá cả minh bạch
                         </li>
                         <li class="flex items-center text-gray-700 font-medium">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Tích hợp đa nền tảng dữ liệu
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Tùy chỉnh món ăn theo sở thích cá nhân
                         </li>
                     </ul>
                 </div>
@@ -239,21 +268,21 @@
             <div class="flex flex-col md:flex-row-reverse items-center mb-32 gap-12">
                 <div class="md:w-1/2 flex justify-center">
                     <div class="relative w-72 h-auto aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-2xl border-[6px] border-black overflow-hidden bg-gray-800 rounded-[3rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden transform rotate-3 hover:rotate-0 transition duration-500">
-                    <img src="assets/images/Search.png" alt="Screen 2" class="w-full h-full object-cover">
+                    <img src="assets/images/Review.png" alt="Screen 2" class="w-full h-full object-cover">
                 </div>
                 </div>
                 <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-bold uppercase tracking-wider text-sm">Kết nối không giới hạn</span>
-                    <h3 class="text-3xl font-bold mt-2 mb-6">Nhắn tin và gọi điện hoàn toàn miễn phí</h3>
+                    <span class="text-[#459b5e] font-bold uppercase tracking-wider text-sm">Đánh giá thực tế</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-6">Cộng đồng đánh giá chân thực</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Hệ thống chat thời gian thực với độ trễ gần như bằng không. Bạn có thể gửi tệp tin dung lượng lớn và tạo nhóm làm việc lên đến 1000 thành viên một cách dễ dàng.
+                        Chỉ những người đã thực sự đặt đồ ăn và trải nghiệm dịch vụ mới được phép đánh giá. Mỗi đánh giá bao gồm số sao, nhận xét văn bản và ảnh/video thực tế. Cộng đồng có thể bình chọn độ hữu ích của từng đánh giá.
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center text-gray-700 font-medium">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Mã hóa đầu cuối (E2EE)
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Đánh giá từ người dùng thực tế đã trải nghiệm
                         </li>
                         <li class="flex items-center text-gray-700 font-medium">
-                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Hỗ trợ gửi ảnh chất lượng cao
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Hệ thống bình chọn giúp lọc ra những đánh giá hữu ích nhất
                         </li>
                     </ul>
                 </div>
@@ -262,26 +291,23 @@
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 flex justify-center">
                     <div class="relative w-72 h-auto aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-2xl border-[6px] border-black overflow-hidden bg-gray-800 rounded-[3rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden transform -rotate-3 hover:rotate-0 transition duration-500">
-                    <img src="assets/images/voucher.png" alt="Screen 3" class="w-full h-full object-cover">
+                    <img src="assets/images/search.png" alt="Screen 3" class="w-full h-full object-cover">
                 </div>
                 </div>
                 <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-bold uppercase tracking-wider text-sm">Tùy biến cá nhân</span>
-                    <h3 class="text-3xl font-bold mt-2 mb-6">Giao diện phù hợp với phong cách của bạn</h3>
+                    <span class="text-[#459b5e] font-bold uppercase tracking-wider text-sm">Tìm kiếm thông minh</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-6">Lọc quán ăn theo ý thích của bạn</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Cho phép thay đổi theme (Dark/Light mode) và tùy chỉnh các widget theo nhu cầu sử dụng hàng ngày. Ứng dụng sẽ học theo thói quen của bạn để đề xuất những lối tắt hữu ích nhất.
+                        Tìm kiếm quán ăn dễ dàng với các bộ lọc toàn diện. Bạn có thể tìm theo tên quán, loại món ăn, giá tiền, khu vực và rating để tìm ra quán phù hợp nhất với nhu cầu của mình.
                     </p>
-                    <div class="flex gap-4 mt-8">
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-indigo-600">50+</div>
-                            <div class="text-sm text-gray-500">Giao diện</div>
-                        </div>
-                        <div class="w-[1px] bg-gray-300 mx-4"></div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-indigo-600">24/7</div>
-                            <div class="text-sm text-gray-500">Hỗ trợ</div>
-                        </div>
-                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center text-gray-700 font-medium">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Tìm kiếm theo tên quán hoặc loại môn ăn yêu thích
+                        </li>
+                        <li class="flex items-center text-gray-700 font-medium">
+                            <i class="fas fa-check-circle text-green-500 mr-3"></i> Lọc theo giá tiền, khu vực và rating từ cộng đồng
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -292,19 +318,19 @@
                 </div>
                 </div>
                 <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-bold uppercase tracking-wider text-sm">Tìm kiếm thông minh</span>
-                    <h3 class="text-3xl font-bold mt-2 mb-6">Truy xuất dữ liệu trong nháy mắt</h3>
+                    <span class="text-[#459b5e] font-bold uppercase tracking-wider text-sm">Theo dõi đơn hàng</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-6">Cập nhật trạng thái giao hàng rõ ràng theo thời gian thực</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Với bộ lọc nâng cao và công nghệ tìm kiếm bằng AI, bạn có thể tìm thấy bất kỳ tin nhắn, tệp tin hay lịch hẹn nào chỉ với một từ khóa đơn giản. Hệ thống tự động phân loại dữ liệu theo nhóm để bạn dễ dàng quản lý.
+                        Theo dõi toàn bộ quá trình đơn hàng từ lúc xác nhận đến khi giao thành công. Ứng dụng hiển thị rõ thời gian giao dự kiến, trạng thái hiện tại của đơn và chi tiết chi phí để bạn luôn chủ động.
                     </p>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex items-start">
-                            <i class="fas fa-search text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Tìm kiếm bằng giọng nói</span>
+                            <i class="fas fa-clock text-[#459b5e] mt-1 mr-3"></i>
+                            <span class="text-gray-700">ETA giao hàng và thời gian thực tế</span>
                         </div>
                         <div class="flex items-start">
-                            <i class="fas fa-filter text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-700">Bộ lọc thông minh</span>
+                            <i class="fas fa-receipt text-[#459b5e] mt-1 mr-3"></i>
+                            <span class="text-gray-700">Trạng thái đơn và tổng tiền minh bạch</span>
                         </div>
                     </div>
                 </div>
@@ -313,18 +339,18 @@
             <div class="flex flex-col md:flex-row items-center mt-32 gap-12">
                 <div class="md:w-1/2 flex justify-center">
                     <div class="relative w-72 h-auto aspect-[9/19.5] bg-white rounded-[2.5rem] shadow-2xl border-[6px] border-black overflow-hidden bg-gray-800 rounded-[3rem] border-[8px] border-gray-900 shadow-2xl overflow-hidden transform -rotate-3 hover:rotate-0 transition duration-500">
-                    <img src="assets/images/rate.png" alt="Screen 5" class="w-full h-full object-cover">
+                    <img src="assets/images/seller.png" alt="Screen 5" class="w-full h-full object-cover">
                 </div>
                 </div>
                 <div class="md:w-1/2">
-                    <span class="text-indigo-600 font-bold uppercase tracking-wider text-sm">Bảo mật & Quyền riêng tư</span>
-                    <h3 class="text-3xl font-bold mt-2 mb-6">Kiểm soát dữ liệu cá nhân hoàn toàn</h3>
+                    <span class="text-[#459b5e] font-bold uppercase tracking-wider text-sm">Dành cho người bán</span>
+                    <h3 class="text-3xl font-bold mt-2 mb-6">Quản lý cửa hàng, đơn hàng và doanh thu trong một màn hình</h3>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Thiết lập bảo mật hai lớp (2FA) và đăng nhập bằng sinh trắc học (FaceID/Vân tay). Chúng tôi cam kết không chia sẻ dữ liệu của bạn cho bất kỳ bên thứ ba nào, đảm bảo môi trường làm việc an toàn nhất.
+                        Bảng điều khiển cho người bán giúp theo dõi đơn mới, đơn đang giao và đơn hoàn tất theo thời gian thực. Chủ quán có thể xem doanh thu theo ngày/tuần/tháng, cập nhật trạng thái món còn hay hết, và thêm món mới nhanh chóng với đầy đủ thông tin giá bán.
                     </p>
-                    <div class="flex items-center p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                        <i class="fas fa-user-shield text-indigo-600 text-2xl mr-4"></i>
-                        <p class="text-sm text-indigo-800 italic">"Dữ liệu của bạn là tài sản của bạn, chúng tôi chỉ giúp bạn bảo vệ nó."</p>
+                    <div class="flex items-center p-4 bg-green-50 rounded-xl border border-green-100">
+                        <i class="fas fa-store text-[#459b5e] text-2xl mr-4"></i>
+                        <p class="text-sm text-green-800 italic">"Chủ quán chủ động vận hành: nắm rõ đơn hàng, doanh thu và tình trạng món ăn mọi lúc."</p>
                     </div>
                 </div>
             </div>
@@ -339,83 +365,93 @@
                 <p class="text-gray-600">Những con người tâm huyết đứng sau sự thành công của dự án.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
                 <div class="group">
                     <div class="relative overflow-hidden rounded-2xl mb-4">
-                        <img src=".." alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <img src="assets/images/mem1.jpg" alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                             <div class="flex space-x-4 text-white text-xl">
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-github"></i></a>
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/Vuxchan" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+                                <a href="#" class="hover:text-green-300"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-800">Nguyễn Văn A</h3>
-                        <p class="text-indigo-600 font-medium">Frontend Developer</p>
+                        <h3 class="text-xl font-bold text-gray-800">Lư Chấn Vũ</h3>
                     </div>
                 </div>
 
                 <div class="group">
                     <div class="relative overflow-hidden rounded-2xl mb-4">
-                        <img src=".." alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <img src="assets/images/mem2.jpg" alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                             <div class="flex space-x-4 text-white text-xl">
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-github"></i></a>
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/m1nhtris16" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+                                <a href="#" class="hover:text-green-300"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-800">Trần Thị B</h3>
-                        <p class="text-indigo-600 font-medium">UI/UX Designer</p>
+                        <h3 class="text-xl font-bold text-gray-800">Lê Minh Trí</h3>
                     </div>
                 </div>
 
                 <div class="group">
                     <div class="relative overflow-hidden rounded-2xl mb-4">
-                        <img src=".." alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <img src="assets/images/mem3.jpg" alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                             <div class="flex space-x-4 text-white text-xl">
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-github"></i></a>
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/phuvi301" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+                                <a href="#" class="hover:text-green-300"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-800">Lê Văn C</h3>
-                        <p class="text-indigo-600 font-medium">Backend Developer</p>
+                        <h3 class="text-xl font-bold text-gray-800">Nguyễn Phú Vinh</h3>
                     </div>
                 </div>
 
                 <div class="group">
                     <div class="relative overflow-hidden rounded-2xl mb-4">
-                        <img src=".." alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                        <img src="assets/images/mem4.jpg" alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                             <div class="flex space-x-4 text-white text-xl">
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-github"></i></a>
-                                <a href="#" class="hover:text-indigo-300"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://github.com/tuancapoo" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+                                <a href="#" class="hover:text-green-300"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        <h3 class="text-xl font-bold text-gray-800">Phạm Thị D</h3>
-                        <p class="text-indigo-600 font-medium">Project Manager</p>
+                        <h3 class="text-xl font-bold text-gray-800">Nguyễn Minh Tuấn </h3>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="relative overflow-hidden rounded-2xl mb-4">
+                        <img src="assets/images/mem5.jpg" alt="Team Member" class="w-full h-80 object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                            <div class="flex space-x-4 text-white text-xl">
+                                <a href="https://github.com/khanhnguyenq31" class="hover:text-green-300"><i class="fab fa-github"></i></a>
+                                <a href="#" class="hover:text-green-300"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold text-gray-800">Nguyễn Quốc Khánh</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-16 bg-[#1a1a1a] text-white">
+    <footer class="py-16 bg-gradient-to-r from-green-600 to-green-900 text-white">
     <div class="container mx-auto px-6 text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-8">Khám phá quy trình thiết kế (UX/UI Case Study)</h2>
         <div class="flex flex-wrap justify-center gap-6">
             <a href="https://www.figma.com/design/FCkHvVxbkpPRn6ZgWoSSrO/Unibite---10h37?node-id=5-6434&t=CUrLkUGh8chjt2uH-1" target="_blank" class="flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-all transform hover:-translate-y-1">
-                <i class="fab fa-figma text-2xl text-purple-500"></i>
+                <i class="fab fa-figma text-2xl text-black"></i>
                 Figma Prototype
             </a>
-            <a href="URL_BEHANCE_CUA_BAN" target="_blank" class="flex items-center gap-3 bg-[#0057ff] text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-all transform hover:-translate-y-1">
+            <a href="URL_BEHANCE_CUA_BAN" target="_blank" class="flex items-center gap-3 bg-[#1769FF] text-white px-8 py-4 rounded-full font-bold hover:bg-[#387f4d] transition-all transform hover:-translate-y-1">
                 <i class="fab fa-behance text-2xl"></i>
                 Behance Case Study
             </a>
@@ -426,6 +462,47 @@
         </div>
     </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const targets = document.querySelectorAll(
+                '#unibite-strategy .grid > div, ' +
+                '#tech-stack .grid > div, ' +
+                '#features .grid > div, ' +
+                '#app-screens .flex.flex-col, ' +
+                '#team .group, ' +
+                'footer a'
+            );
+
+            targets.forEach((el, index) => {
+                el.classList.add('reveal-on-scroll');
+                el.style.transitionDelay = `${(index % 5) * 80}ms`;
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                targets.forEach((el) => el.classList.add('revealed'));
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    });
+                },
+                {
+                    threshold: 0.18,
+                    rootMargin: '0px 0px -8% 0px',
+                }
+            );
+
+            targets.forEach((el) => observer.observe(el));
+        });
+    </script>
 
 </body>
 </html>
